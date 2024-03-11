@@ -1,0 +1,48 @@
+{% extends 'aplicacion/index.html' %}
+
+
+{% block header %}
+<header class="bg-dark py-5">
+    <div class="container px-3 px-lg-4 my-4">
+        <div class="text-center text-white">
+            <h2 class="display-7 fw-bolder">Todos los alojamientos</h2>
+            <a href="{% url 'nuevo_alojamiento'%}" class="btn btn-primary">Añadir mi alojamiento</a>
+        </div>
+    </div>
+</header>
+{% endblock header %}
+
+{% block contenido %}
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        {% block producto %}
+        {% for a in alojamiento  %}
+        <div class="col mb-5">
+            <div class="card h-80">
+                <!-- Product image-->
+                <img class="card-img-top" src="{{ a.imagen }}" alt="Imagen del alojamiento">
+                <!-- Product details-->
+                <div class="card-body p-4">
+                    <div class="text-center">
+                        <!-- Product name-->
+                        <h5 class="fw-bolder"><td>{{ a.titulo }}</td></h5>
+                        <!-- Product reviews-->
+                        <div class="d-flex justify-content-center small text-warning mb-2">
+                            <div> {{ a.descripcion }}</div>
+                        </div>
+                        <!-- Product price-->
+                        U$D {{ a.precio }}
+                </div>
+                <!-- Product actions-->
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                    <div class="text-center"><a href="{% url 'detalle_alojamiento' a.id %}" class="btn btn-primary">Más información</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% endblock producto %}
+    </section>
+    <!--Acá no supe cómo hacer para que se viera un alojamiento al lado del otro, y no debajo del otro como quedaron-->
+{% endblock contenido %}
